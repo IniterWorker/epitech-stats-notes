@@ -5,6 +5,7 @@
 from sys import stderr as error
 from sys import stdout as out
 from sys import exit
+from re import compile
 
 def print_usage(output, bin_name):
     print("%s: Usage:\n" % bin_name, file=output)
@@ -18,14 +19,24 @@ def get(argv):
     module_name = ""
 
     i = 1
+    module_regex = compile("^[A-Z]{1}-[A-Z]{2,}-[0-9]{2,}$")
+    name_regex = compile("^[a-z\-0-9]*\.[a-z\-0-9]*$")
     while i < len(argv):
         try:
             if argv[i] == "-u":
                 i += 1
                 user_name = argv[i]
+                if not name_regex.fullmatch(user_name):
+                    print("Error: Invalid User name", file=error)
+                    print_usage(error, argv[0])
+                    exit(84)
             elif argv[i] == "-m":
                 i += 1
                 module_name = argv[i]
+                if not module_regex.fullmatch(module_name):
+                    print("Error: Invalid module name", file=error)
+                    print_usage(error, argv[0])
+                    exit(84)
             else:
                 if argv[i] == "-h" or argv[i] == "--help":
                     output = out
