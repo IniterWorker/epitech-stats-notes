@@ -1,13 +1,16 @@
-# epitech-stats-notes
+# Epitech-stats-notes
 
 ```sh
- $> ./stats-notes -u xxxx.xxxx@epitech.eu -m B-MAT-050
+ $> ./stats-notes -u prenom.nom@epitech.eu [ModuleCodes...]
 ```
 
-# Configuration
+## Options
+* mode verbose ```-v boolean```
+* target user  ```-u login```
+* output ```-o str```
 
-__Configuration file JSON__ ./stats-notes/.auth
+## Configuration
 
-```json
-{"auth": {"token": "auth-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}}
+```sh
+ $> ./stats-notes -a auth-xxxxxxxxxxxxxxx -u prenom.nom@epitech.eu [ModuleCodes...]
 ```
