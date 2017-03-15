@@ -1,42 +1,41 @@
 from os.path import expanduser
-from os.path import exists
-from os import makedirs
+from jsonpo.jsonpo import JSONPO
+from jsonpo.jsonpo import JSONSD
 import json
-import io
 
 
-class Configure:
+class Configure(JSONSD):
     """
     Configuration Manager
-    ~/.stats-notes/.auth
+    ~/.stats-notes/auth.json
     if not exists create a new file and directory in the Home directory
     """
-    defaultNameDirectory = ".stats-notes"
-    defaultPathDirectory = (expanduser("~") + "/" + defaultNameDirectory)
-    defaultNameFile = ".auth"
-    defaultPathFile = (defaultPathDirectory + "/" + defaultNameFile)
 
-    def __init__(self):
-        self._json_data = None
-        if not exists(Configure.defaultPathDirectory):
-            makedirs(Configure.defaultPathDirectory)
-        if exists(Configure.defaultPathFile):
-            with open(Configure.defaultPathFile) as f:
-                self._json_data = json.load(f)
-        else:
-            self._json_data = {
-                "auth": {
-                    "token": None
-                }
+    FilePath = expanduser("~") + "/.stats-notes/auth.json"
+
+    def __init__(self, filepath = None):
+        self.autologin = None
+        self.Manager = JSONPO(Configure.FilePath)
+        self.Manager.load(self)
+        if filepath is not None:
+            Configure.FilePath = filepath
+
+    def __serialize__(self):
+        return json.dumps({
+            "config": {
+                "autologin": self.autologin
             }
-            self.save()
+        })
 
-    def getAuth(self):
-        return self._json_data["auth"]["token"].__str__()
+    def __deserialize__(self, obj):
+        self.autologin = obj["config"]["autologin"]
 
-    def setAuth(self, value):
-        self._json_data["auth"]["token"] = value
+    def get_auto_login(self):
+        return self.autologin
+
+    def set_auto_login(self, autlogin):
+        self.autologin = autlogin
+        self.Manager.save(self)
 
     def save(self):
-        with open(Configure.defaultPathFile, 'w+') as f:
-            json.dump(self._json_data, f)
+        self.Manager.save(self)

@@ -8,7 +8,7 @@ class IntranetAPI():
     def __init__(self, config):
         if not isinstance(config, Configure):
             raise TypeError("Invalid instance of Configure")
-        if config.getAuth() == "None":
+        if config.get_auto_login() == "None":
             raise ValueError("Please check auth key")
         self._config = config
         self._host = "https://intra.epitech.eu/"
@@ -33,7 +33,7 @@ class IntranetAPI():
         self._format = format
 
     def urlFormated(self, middle):
-        return self._host + self._config.getAuth() + "/" + middle + "?format=" + self._format
+        return self._host + self._config.get_auto_login() + "/" + middle + "?format=" + self._format
 
     def urlFormatedWithUser(self, middle, login):
-        return self._host + self._config.getAuth() + "/user/" + login + "/" + middle + "?format=" + self._format
+        return self._host + self._config.get_auto_login() + "/user/" + login + "/" + middle + "?format=" + self._format
