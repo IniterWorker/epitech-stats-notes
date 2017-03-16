@@ -8,7 +8,7 @@
 * mode verbose ```-v boolean```
 * target user  ```-u login```
 * output ```-o str```
-
+* auth ```-a auth-xxxxxxxxxxxxxxx```
 ## Configuration
 
 ```sh

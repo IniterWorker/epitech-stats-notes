@@ -1,6 +1,7 @@
 from config import Configure
 
-class IntranetAPI():
+
+class IntranetAPI:
     """
     Simple AutoLogin API
     """
@@ -14,26 +15,26 @@ class IntranetAPI():
         self._host = "https://intra.epitech.eu/"
         self._format = "json"
 
-    def getHost(self):
+    def get_host(self):
         return self._host
 
-    def getConfig(self):
+    def get_config(self):
         return self._config
 
-    def getFormat(self):
+    def get_format(self):
         return self._format
 
-    def setHost(self, host):
+    def set_host(self, host):
         self._host = host
 
-    def setConfig(self, config):
+    def set_config(self, config):
         self._config = config
 
-    def setFormat(self, format):
+    def set_format(self, format):
         self._format = format
 
-    def urlFormated(self, middle):
+    def url_formated(self, middle):
         return self._host + self._config.get_auto_login() + "/" + middle + "?format=" + self._format
 
-    def urlFormatedWithUser(self, middle, login):
+    def url_formated_with_user(self, middle, login):
         return self._host + self._config.get_auto_login() + "/user/" + login + "/" + middle + "?format=" + self._format
