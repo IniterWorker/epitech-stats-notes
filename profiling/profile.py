@@ -31,18 +31,10 @@ class Profile:
             return
         if "grade_stats" in options:
             grade_number = sum(len(x) for x in self.moduleCollection.get_grades()[0:4])
-            print("A = " + (len(self.moduleCollection.get_grades()[0]) / grade_number).__str__()
-                  + " credits (" + sum(x.get_credits() for x in self.moduleCollection.get_grades()[0]).__str__() + ")")
-            print("B = " + (len(self.moduleCollection.get_grades()[1]) / grade_number).__str__()
-                  + " credits (" + sum(x.get_credits() for x in self.moduleCollection.get_grades()[1]).__str__() + ")")
-            print("C = " + (len(self.moduleCollection.get_grades()[2]) / grade_number).__str__()
-                  + " credits (" + sum(x.get_credits() for x in self.moduleCollection.get_grades()[2]).__str__() + ")")
-            print("D = " + (len(self.moduleCollection.get_grades()[3]) / grade_number).__str__()
-                  + " credits (" + sum(x.get_credits() for x in self.moduleCollection.get_grades()[3]).__str__() + ")")
-            print("E = " + (len(self.moduleCollection.get_grades()[4]) / grade_number).__str__()
-                  + " credits (" + sum(x.get_credits() for x in self.moduleCollection.get_grades()[4]).__str__() + ")")
-            print("- = " + (len(self.moduleCollection.get_grades()[5])).__str__())
-            print("Aq = " + (len(self.moduleCollection.get_grades()[6])).__str__())
-            print("Ec = " + (len(self.moduleCollection.get_grades()[7])).__str__())
+
+            for i in range(0, 4):
+                print("%s (ratio= %2f) with %d credit(s)" % (self.moduleCollection.get_letter_with(i),
+                                                             self.moduleCollection.get_ratio_with(i),
+                                                             self.moduleCollection.get_credits_with(i)))
         if "module_collection" in options:
             self.moduleCollection.display()

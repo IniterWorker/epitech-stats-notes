@@ -14,6 +14,7 @@ class IntranetAPI:
         self._config = config
         self._host = "https://intra.epitech.eu/"
         self._format = "json"
+        self._auth = None
 
     def get_host(self):
         return self._host
