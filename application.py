@@ -22,7 +22,8 @@ if __name__ == "__main__":
                              ' email'
                              ' grade_stats'
                              ' module_collection')
-    parser.add_argument('modules', metavar='ModuleCode', type=str, nargs='+',
+    parser.add_argument('-m', '-modules', metavar='ModuleCode',
+                        type=str, nargs='+',
                         help='an str for the accumulator')
 
 
@@ -36,5 +37,3 @@ if __name__ == "__main__":
     profile = Profile(context, args.user)
     profile.collect()
     profile.display(args.display_options[0] if args.display_options is not None else None)
-
-
